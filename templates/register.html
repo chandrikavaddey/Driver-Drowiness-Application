@@ -1,31 +1,39 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AlertDrive - Driver Drowsiness Detection Registration</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
-       :root {
-            --primary-color: #3a86ff;
-            --secondary-color: #8338ec;
-            --accent-color: #ff006e;
-            --light-color: #f8f9fa;
-            --dark-color: #212529;
+        :root {
+            --primary-bg: #1a1a2e;
+            --secondary-bg: #16213e;
+            --card-bg: rgba(30, 30, 50, 0.7);
+            --text-color: #e6e6e6;
+            --accent-color:rgb(242, 238, 246);
+            --highlight-color: #7b2cbf;
+            --danger-color: #e63946;
+            --success-color: #2dc653;
+            --warning-color: #cfbaf0;
+            --border-color: rgba(123, 44, 191, 0.5);
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: var(--dark-color);
-            background-color: #f0f2f5;
             margin: 0;
             padding: 0;
+            background: var(--primary-bg);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .container {
             max-width: 800px;
-            margin: 0 auto;
+            width: 100%;
             padding: 20px;
         }
 
@@ -37,32 +45,61 @@
         .logo {
             font-size: 28px;
             font-weight: bold;
-            color: var(--primary-color);
-        }
-
-        .logo span {
             color: var(--accent-color);
         }
 
+        .logo span {
+            color: var(--highlight-color);
+        }
+
         h1 {
-            color: var(--dark-color);
+            color: var(--text-color);
             margin-top: 10px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Added dropdown text color fix */
+        select, select option {
+            color: var(--text-color) !important;
+            background: var(--card-bg);
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 16px;
+            box-sizing: border-box;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--highlight-color);
+            box-shadow: 0 0 0 3px rgba(123, 44, 191, 0.3);
         }
 
         .card {
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            background: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
             padding: 30px;
             margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            animation: fadeIn 1.5s ease-in-out;
         }
 
         .form-title {
             font-size: 22px;
             margin-top: 0;
             margin-bottom: 20px;
-            border-bottom: 2px solid var(--light-color);
+            border-bottom: 2px solid var(--border-color);
             padding-bottom: 10px;
+            color: var(--text-color);
         }
 
         .form-group {
@@ -73,21 +110,7 @@
             display: block;
             margin-bottom: 8px;
             font-weight: 500;
-        }
-
-        input, select {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-            box-sizing: border-box;
-        }
-
-        input:focus, select:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 2px rgba(58, 134, 255, 0.2);
+            color: var(--text-color);
         }
 
         .form-row {
@@ -101,55 +124,71 @@
 
         .required:after {
             content: " *";
-            color: var(--accent-color);
+            color: var(--danger-color);
         }
 
         .btn {
-            background-color: var(--primary-color);
+            background: var(--accent-color);
             color: white;
             border: none;
             padding: 12px 24px;
-            border-radius: 5px;
+            border-radius: 10px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            transition: background-color 0.2s;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            width: 100%;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
         }
 
         .btn:hover {
-            background-color: #2a75e8;
+            background: var(--highlight-color);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(90, 24, 154, 0.5);
         }
 
         .terms {
             font-size: 14px;
             margin-top: 20px;
-            color: #666;
+            color: rgba(255, 255, 255, 0.7);
         }
 
         .terms a {
-            color: var(--primary-color);
+            color: var(--highlight-color);
             text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .terms a:hover {
+            color: var(--accent-color);
         }
 
         .info-card {
-            background-color: #e8f4fe;
-            border-left: 4px solid var(--primary-color);
+            background: rgba(30, 30, 50, 0.5);
+            border-left: 4px solid var(--highlight-color);
             padding: 15px;
             margin-bottom: 30px;
-            border-radius: 5px;
+            border-radius: 10px;
+            color: var(--text-color);
         }
 
         .info-card h3 {
             margin-top: 0;
-            color: var(--primary-color);
+            color: var(--highlight-color);
         }
 
         footer {
             text-align: center;
             padding: 20px;
-            color: #666;
+            color: rgba(255, 255, 255, 0.7);
             font-size: 14px;
-        } /* Your existing CSS styles */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
     </style>
 </head>
 <body>
@@ -168,7 +207,7 @@
             <h2 class="form-title">Create Your Account</h2>
 
             <form id="registrationForm" action="/register" method="POST">
-               <div class="form-row">
+                <div class="form-row">
                     <div class="form-group">
                         <label for="firstName" class="required">First Name</label>
                         <input type="text" id="firstName" name="firstName" required>
@@ -221,7 +260,7 @@
                     </div>
 
                     <div class="form-group">
-                       <label for="driverNumber" class="required">Driver Number</label>
+                        <label for="driverNumber" class="required">Driver Number</label>
                         <input type="text" id="driverNumber" name="driverNumber" required>
                     </div>
                 </div>
@@ -246,7 +285,7 @@
 
                 <div class="terms">
                     By registering, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>. We'll use your data to set up your drowsiness detection system and keep you safe on the road.
-                </div> <!-- Your existing form fields -->
+                </div>
             </form>
         </div>
 
