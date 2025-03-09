@@ -1,41 +1,54 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Driver Drowsiness Detection</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         :root {
-            --primary-color: #3a86ff;
-            --secondary-color: #8338ec;
-            --accent-color: #ff006e;
-            --light-color: #f8f9fa;
-            --dark-color: #212529;
+            --primary-bg: #1a1a2e;
+            --secondary-bg: #16213e;
+            --card-bg: rgba(30, 30, 50, 0.7);
+            --text-color: #e6e6e6;
+            --accent-color: #5a189a;
+            --highlight-color: #7b2cbf;
+            --danger-color: #e63946;
+            --success-color: #2dc653;
+            --warning-color: #cfbaf0;
+            --border-color: rgba(123, 44, 191, 0.5);
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: var(--dark-color);
-            background-color: #f0f2f5;
             margin: 0;
             padding: 0;
+            background: var(--primary-bg);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .container {
             max-width: 400px;
-            margin: 100px auto;
-            padding: 20px;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            padding: 30px;
+            background: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            animation: fadeIn 1.5s ease-in-out;
         }
 
         h1 {
             text-align: center;
-            color: var(--primary-color);
+            color: var(--text-color);
             margin-bottom: 20px;
+            font-size: 2rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         .form-group {
@@ -46,48 +59,67 @@
             display: block;
             margin-bottom: 8px;
             font-weight: 500;
+            color: var(--text-color);
         }
 
         input {
             width: 100%;
             padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
             font-size: 16px;
             box-sizing: border-box;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         input:focus {
             outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 2px rgba(58, 134, 255, 0.2);
+            border-color: var(--highlight-color);
+            box-shadow: 0 0 0 3px rgba(123, 44, 191, 0.3);
         }
 
         .btn {
-            background-color: var(--primary-color);
+            background: var(--accent-color);
             color: white;
             border: none;
             padding: 12px 24px;
-            border-radius: 5px;
+            border-radius: 10px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            transition: background-color 0.2s;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
             width: 100%;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
         }
 
         .btn:hover {
-            background-color: #2a75e8;
+            background: var(--highlight-color);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(90, 24, 154, 0.5);
         }
 
         .register-link {
             text-align: center;
             margin-top: 20px;
+            color: var(--text-color);
         }
 
         .register-link a {
-            color: var(--primary-color);
+            color: var(--highlight-color);
             text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .register-link a:hover {
+            color: var(--accent-color);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
 </head>
