@@ -8,4 +8,5 @@ streamlit
 streamlit-webrtc
 scipy
 mediapipe
+gunicorn
 
